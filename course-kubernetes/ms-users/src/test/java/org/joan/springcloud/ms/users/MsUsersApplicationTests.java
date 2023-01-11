@@ -1,4 +1,4 @@
-package org.joan.springcloud.ms.users.msusers;
+package org.joan.springcloud.ms.users;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
