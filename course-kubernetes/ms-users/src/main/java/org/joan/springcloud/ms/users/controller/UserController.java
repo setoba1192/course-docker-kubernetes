@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("/")
 @RestController
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<User>> list() {
         return ResponseEntity.ok(userService.list());
     }
@@ -49,7 +50,13 @@ public class UserController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        return userService.findById(id).isPresent() ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+
+        if (userService.findById(id).isPresent()) {
+            userService.delete(id);
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
 }
