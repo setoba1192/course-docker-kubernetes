@@ -33,7 +33,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody User user, BindingResult result) {
 
-        if(userService.findByEmail(user.getEmail()).isPresent())
+        if(!user.getEmail().isEmpty() && userService.findByEmail(user.getEmail()).isPresent())
             return ResponseEntity.badRequest().body(Collections.singletonMap("Message","User already exist with this email"));
 
         if (result.hasErrors())
@@ -50,7 +50,7 @@ public class UserController {
 
         Optional<User> foundUser = userService.findByEmail(user.getEmail());
 
-        if(foundUser.isPresent() && !user.getEmail().equalsIgnoreCase(foundUser.get().getEmail()))
+        if(foundUser.isPresent() && !user.getEmail().isEmpty() && user.getEmail().equalsIgnoreCase(foundUser.get().getEmail()))
         return ResponseEntity.badRequest().body(Collections.singletonMap("Message","User already exist with this email"));
 
         return userService.findById(id).map(usr -> {
