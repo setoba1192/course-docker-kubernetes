@@ -47,4 +47,9 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findByEmail(String email) {
         return this.userRepository.findByEmailQ(email);
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return this.userRepository.existsByEmail(email);
+    }
 }

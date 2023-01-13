@@ -33,7 +33,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody User user, BindingResult result) {
 
-        if(!user.getEmail().isEmpty() && userService.findByEmail(user.getEmail()).isPresent())
+        if(!user.getEmail().isEmpty() && userService.existsByEmail(user.getEmail()))
             return ResponseEntity.badRequest().body(Collections.singletonMap("Message","User already exist with this email"));
 
         if (result.hasErrors())
