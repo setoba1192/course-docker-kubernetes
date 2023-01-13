@@ -1,6 +1,6 @@
 package com.joan.springcloud.ms.courses.mscourses.service;
 
-import com.joan.springcloud.ms.courses.mscourses.entity.Course;
+import com.joan.springcloud.ms.courses.mscourses.model.entity.Course;
 
 import java.util.List;
 import java.util.Optional;

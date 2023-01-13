@@ -1,6 +1,6 @@
 package com.joan.springcloud.ms.courses.mscourses.service;
 
-import com.joan.springcloud.ms.courses.mscourses.entity.Course;
+import com.joan.springcloud.ms.courses.mscourses.model.entity.Course;
 import com.joan.springcloud.ms.courses.mscourses.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

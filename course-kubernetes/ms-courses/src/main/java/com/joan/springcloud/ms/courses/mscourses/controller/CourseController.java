@@ -1,6 +1,6 @@
 package com.joan.springcloud.ms.courses.mscourses.controller;
 
-import com.joan.springcloud.ms.courses.mscourses.entity.Course;
+import com.joan.springcloud.ms.courses.mscourses.model.entity.Course;
 import com.joan.springcloud.ms.courses.mscourses.service.CourseService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.joan.springcloud.ms.courses.mscourses.entity;
+package com.joan.springcloud.ms.courses.mscourses.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
