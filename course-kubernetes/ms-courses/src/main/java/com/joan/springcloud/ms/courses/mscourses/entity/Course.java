@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -21,4 +23,14 @@ public class Course {
     @NotBlank
     private String name;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<CourseUser> courseUsers;
+
+    public void addCourseUser(CourseUser courseUser){
+        this.courseUsers.add(courseUser);
+    }
+
+    public void removeCourseUser(CourseUser courseUser){
+        this.courseUsers.remove(courseUser);
+    }
 }
