@@ -9,9 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RequestMapping("/")
 @RestController
@@ -34,6 +32,10 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody User user, BindingResult result) {
+
+        if(userService.findByEmail(user.getEmail()).isPresent())
+            return ResponseEntity.badRequest().body(Collections.singletonMap("Message","User already exist with this email"));
+
         if (result.hasErrors())
             return validate(result);
 
@@ -45,6 +47,11 @@ public class UserController {
 
         if (result.hasErrors())
             return validate(result);
+
+        Optional<User> foundUser = userService.findByEmail(user.getEmail());
+
+        if(foundUser.isPresent() && !user.getEmail().equalsIgnoreCase(foundUser.get().getEmail()))
+        return ResponseEntity.badRequest().body(Collections.singletonMap("Message","User already exist with this email"));
 
         return userService.findById(id).map(usr -> {
 
