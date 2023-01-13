@@ -1,13 +1,17 @@
 package org.joan.springcloud.ms.users.controller;
 
+import jakarta.validation.Valid;
 import org.joan.springcloud.ms.users.model.entity.User;
 import org.joan.springcloud.ms.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/")
 @RestController
@@ -28,14 +32,20 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public User save(@RequestBody User user) {
-        return userService.save(user);
+    public ResponseEntity<?> save(@Valid @RequestBody User user, BindingResult result) {
+        if (result.hasErrors())
+            return validate(result);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<?> update(@RequestBody User user, @PathVariable Long id) {
+    public ResponseEntity<?> update(@Valid @RequestBody User user, BindingResult result, @PathVariable Long id) {
+
+        if (result.hasErrors())
+            return validate(result);
+
         return userService.findById(id).map(usr -> {
 
             usr.setEmail(user.getEmail());
@@ -57,6 +67,14 @@ public class UserController {
         }
 
         return ResponseEntity.notFound().build();
+    }
+
+    private ResponseEntity<?> validate(BindingResult result) {
+        Map<String, String> errors = new HashMap<>();
+        result.getFieldErrors().forEach(err -> {
+            errors.put(err.getField(), "Field " + err.getField() + " " + err.getDefaultMessage());
+        });
+        return ResponseEntity.badRequest().body(errors);
     }
 
 }
