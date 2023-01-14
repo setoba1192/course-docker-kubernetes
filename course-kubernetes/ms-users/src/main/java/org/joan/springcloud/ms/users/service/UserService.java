@@ -2,6 +2,7 @@ package org.joan.springcloud.ms.users.service;
 
 import org.joan.springcloud.ms.users.model.entity.User;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,4 +19,6 @@ public interface UserService {
     Optional<User> findByEmail(String email);
 
     boolean existsByEmail(String email);
+
+    List<User> findAllById(Collection<Long> ids);
 }
