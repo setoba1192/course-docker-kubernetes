@@ -1,7 +1,9 @@
 package com.joan.springcloud.ms.courses.mscourses.controller;
 
+import com.joan.springcloud.ms.courses.mscourses.model.User;
 import com.joan.springcloud.ms.courses.mscourses.model.entity.Course;
 import com.joan.springcloud.ms.courses.mscourses.service.CourseService;
+import feign.FeignException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +45,7 @@ public class CourseController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<?> update(@Valid  @RequestBody Course course, BindingResult result, @PathVariable Long id) {
+    public ResponseEntity<?> update(@Valid @RequestBody Course course, BindingResult result, @PathVariable Long id) {
         if (result.hasErrors())
             return validate(result);
 
@@ -58,6 +61,40 @@ public class CourseController {
             this.courseService.delete(c.getId());
             return ResponseEntity.noContent().build();
         }).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/assign-user/{courseId}")
+    public ResponseEntity<?> assignUser(@RequestBody User user, @PathVariable Long courseId) {
+
+        try {
+            return courseService.assignUser(user, courseId).map(ResponseEntity::ok)
+                    .orElseGet(() -> ResponseEntity.notFound().build());
+        } catch (FeignException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("message", "User doesn't exist or failed communication with the server: " + e.getMessage()));
+        }
+    }
+
+    @PostMapping("/create-user/{courseId}")
+    public ResponseEntity<?> saveUser(@RequestBody User user, @PathVariable Long courseId) {
+        try {
+            return courseService.saveUser(user, courseId).map(u->ResponseEntity.status(HttpStatus.CREATED).body(u))
+                    .orElseGet(() -> ResponseEntity.notFound().build());
+        } catch (FeignException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("message", "User couldn't be created or failed communication with the server: " + e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/delete-user/{courseId}")
+    public ResponseEntity<?> deleteUser(@RequestBody User user, @PathVariable Long courseId) {
+        try {
+            return courseService.unAssignUser(user, courseId).map(ResponseEntity::ok)
+                    .orElseGet(() -> ResponseEntity.notFound().build());
+        } catch (FeignException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("message", "User couldn't be deleted or failed communication with the server: " + e.getMessage()));
+        }
     }
 
     private ResponseEntity<?> validate(BindingResult result) {
