@@ -3,6 +3,7 @@ package com.joan.springcloud.ms.courses.mscourses.service;
 import com.joan.springcloud.ms.courses.mscourses.client.UserClientRest;
 import com.joan.springcloud.ms.courses.mscourses.model.User;
 import com.joan.springcloud.ms.courses.mscourses.model.entity.Course;
+import com.joan.springcloud.ms.courses.mscourses.model.entity.CourseUser;
 import com.joan.springcloud.ms.courses.mscourses.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,18 +49,63 @@ public class CourseServiceImpl implements CourseService {
         this.courseRepository.deleteById(id);
     }
 
+    @Transactional
     @Override
     public Optional<User> assignUser(User user, Long courseId) {
+
+        Optional<Course> course = courseRepository.findById(courseId);
+        if (course.isPresent()) {
+            User userMs = userClientRest.findById(user.getId());
+
+            Course c = course.get();
+            CourseUser courseUser = CourseUser.builder()
+                    .userId(userMs.getId())
+                    .build();
+            c.addCourseUser(courseUser);
+            courseRepository.save(c);
+
+            return Optional.of(userMs);
+        }
         return Optional.empty();
     }
 
+    @Transactional
     @Override
     public Optional<User> saveUser(User user, Long courseId) {
+
+        Optional<Course> course = courseRepository.findById(courseId);
+        if (course.isPresent()) {
+            User userMs = userClientRest.save(user);
+
+            Course c = course.get();
+            CourseUser courseUser = CourseUser.builder()
+                    .userId(userMs.getId())
+                    .build();
+            c.addCourseUser(courseUser);
+            courseRepository.save(c);
+
+            return Optional.of(userMs);
+        }
         return Optional.empty();
     }
 
+    @Transactional
     @Override
     public Optional<User> unAssignUser(User user, Long courseId) {
+        Optional<Course> course = courseRepository.findById(courseId);
+        if (course.isPresent()) {
+            User userMs = userClientRest.findById(user.getId());
+
+            Course c = course.get();
+            CourseUser courseUser = CourseUser.builder()
+                    .userId(userMs.getId())
+                    .build();
+            c.removeCourseUser(courseUser);
+            courseRepository.save(c);
+
+            return Optional.of(userMs);
+        }
+
         return Optional.empty();
     }
 }
