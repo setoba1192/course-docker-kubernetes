@@ -1,5 +1,6 @@
 package com.joan.springcloud.ms.courses.mscourses.service;
 
+import com.joan.springcloud.ms.courses.mscourses.model.User;
 import com.joan.springcloud.ms.courses.mscourses.model.entity.Course;
 
 import java.util.List;
@@ -14,5 +15,11 @@ public interface CourseService {
     Course save(Course course);
 
     void delete(Long id);
+
+    Optional<User> assignUser(User user, Long courseId);
+
+    Optional<User> saveUser(User user, Long courseId);
+
+    Optional<User> unAssignUser(User user, Long courseId);
 
 }

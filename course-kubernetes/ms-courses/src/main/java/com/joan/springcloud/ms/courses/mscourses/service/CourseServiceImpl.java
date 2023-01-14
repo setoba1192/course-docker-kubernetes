@@ -1,5 +1,7 @@
 package com.joan.springcloud.ms.courses.mscourses.service;
 
+import com.joan.springcloud.ms.courses.mscourses.client.UserClientRest;
+import com.joan.springcloud.ms.courses.mscourses.model.User;
 import com.joan.springcloud.ms.courses.mscourses.model.entity.Course;
 import com.joan.springcloud.ms.courses.mscourses.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +16,12 @@ public class CourseServiceImpl implements CourseService {
 
     private CourseRepository courseRepository;
 
+    private UserClientRest userClientRest;
+
     @Autowired
-    public CourseServiceImpl(CourseRepository courseRepository) {
+    public CourseServiceImpl(CourseRepository courseRepository, UserClientRest userClientRest) {
         this.courseRepository = courseRepository;
+        this.userClientRest = userClientRest;
     }
 
     @Transactional(readOnly = true)
@@ -41,5 +46,20 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void delete(Long id) {
         this.courseRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<User> assignUser(User user, Long courseId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> saveUser(User user, Long courseId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> unAssignUser(User user, Long courseId) {
+        return Optional.empty();
     }
 }
