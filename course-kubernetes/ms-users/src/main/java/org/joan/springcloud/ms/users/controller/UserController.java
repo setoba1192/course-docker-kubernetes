@@ -37,8 +37,8 @@ public class UserController {
             return validate(result);
         }
 
-        if(!user.getEmail().isEmpty() && userService.existsByEmail(user.getEmail()))
-            return ResponseEntity.badRequest().body(Collections.singletonMap("Message","User already exist with this email"));
+        if (!user.getEmail().isEmpty() && userService.existsByEmail(user.getEmail()))
+            return ResponseEntity.badRequest().body(Collections.singletonMap("Message", "User already exist with this email"));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
     }
@@ -51,8 +51,8 @@ public class UserController {
 
         Optional<User> foundUser = userService.findByEmail(user.getEmail());
 
-        if(foundUser.isPresent() && !user.getEmail().isEmpty() && user.getEmail().equalsIgnoreCase(foundUser.get().getEmail()))
-        return ResponseEntity.badRequest().body(Collections.singletonMap("Message","User already exist with this email"));
+        if (foundUser.isPresent() && !user.getEmail().isEmpty() && user.getEmail().equalsIgnoreCase(foundUser.get().getEmail()))
+            return ResponseEntity.badRequest().body(Collections.singletonMap("Message", "User already exist with this email"));
 
         return userService.findById(id).map(usr -> {
 
@@ -75,6 +75,12 @@ public class UserController {
         }
 
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/users-course")
+    public ResponseEntity<?> getUserByCourse(@RequestParam List<Long> ids) {
+
+        return ResponseEntity.ok(this.userService.findAllById(ids));
     }
 
     private ResponseEntity<?> validate(BindingResult result) {
