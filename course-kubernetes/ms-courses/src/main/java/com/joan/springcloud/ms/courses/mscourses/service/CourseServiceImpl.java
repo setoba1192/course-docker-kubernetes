@@ -38,6 +38,7 @@ public class CourseServiceImpl implements CourseService {
         return this.courseRepository.findById(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Course> findByIdWithUsers(Long id) {
 
