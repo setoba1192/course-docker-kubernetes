@@ -78,7 +78,7 @@ public class CourseController {
     @PostMapping("/create-user/{courseId}")
     public ResponseEntity<?> saveUser(@RequestBody User user, @PathVariable Long courseId) {
         try {
-            return courseService.saveUser(user, courseId).map(u->ResponseEntity.status(HttpStatus.CREATED).body(u))
+            return courseService.saveUser(user, courseId).map(u -> ResponseEntity.status(HttpStatus.CREATED).body(u))
                     .orElseGet(() -> ResponseEntity.notFound().build());
         } catch (FeignException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -102,6 +102,12 @@ public class CourseController {
         return this.courseService.findByIdWithUsers(courseId)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/delete-user/{userId}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
+        this.courseService.deleteCourseUserById(userId);
+        return ResponseEntity.noContent().build();
     }
 
     private ResponseEntity<?> validate(BindingResult result) {

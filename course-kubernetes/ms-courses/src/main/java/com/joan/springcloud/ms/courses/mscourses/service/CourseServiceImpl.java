@@ -121,4 +121,10 @@ public class CourseServiceImpl implements CourseService {
 
         return Optional.empty();
     }
+
+    @Transactional
+    @Override
+    public void deleteCourseUserById(Long userId) {
+        this.courseRepository.deleteCourseUserById(userId);
+    }
 }
