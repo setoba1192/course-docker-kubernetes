@@ -97,6 +97,13 @@ public class CourseController {
         }
     }
 
+    @GetMapping("/users-course/{courseId}")
+    public ResponseEntity<?> findByIdWithUsers(@PathVariable Long courseId) {
+        return this.courseService.findByIdWithUsers(courseId)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     private ResponseEntity<?> validate(BindingResult result) {
         Map<String, String> errors = new HashMap<>();
         result.getFieldErrors().forEach(err -> {
