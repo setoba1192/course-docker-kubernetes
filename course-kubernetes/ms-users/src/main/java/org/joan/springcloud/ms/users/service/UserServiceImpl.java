@@ -1,5 +1,6 @@
 package org.joan.springcloud.ms.users.service;
 
+import org.joan.springcloud.ms.users.client.CourseFeignClient;
 import org.joan.springcloud.ms.users.model.entity.User;
 import org.joan.springcloud.ms.users.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,12 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
+    private CourseFeignClient courseClientRest;
+
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, CourseFeignClient courseClientRest) {
         this.userRepository = userRepository;
+        this.courseClientRest = courseClientRest;
     }
 
     @Transactional(readOnly = true)
@@ -42,6 +46,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         userRepository.deleteById(id);
+        this.courseClientRest.deleteCourseUserByUserId(id);
     }
 
     @Override

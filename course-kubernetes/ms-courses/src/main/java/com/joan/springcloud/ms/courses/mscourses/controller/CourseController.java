@@ -86,7 +86,7 @@ public class CourseController {
         }
     }
 
-    @DeleteMapping("/delete-user/{courseId}")
+    @DeleteMapping("/delete-course-user/{courseId}")
     public ResponseEntity<?> deleteUser(@RequestBody User user, @PathVariable Long courseId) {
         try {
             return courseService.unAssignUser(user, courseId).map(ResponseEntity::ok)
