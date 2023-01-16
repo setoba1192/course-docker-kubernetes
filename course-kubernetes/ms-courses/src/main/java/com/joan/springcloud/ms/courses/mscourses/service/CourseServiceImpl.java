@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -35,6 +36,17 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Optional<Course> findById(Long id) {
         return this.courseRepository.findById(id);
+    }
+
+    @Override
+    public Optional<Course> findByIdWithUsers(Long id) {
+
+        return this.courseRepository.findById(id).map(course -> {
+            course.setUsers(this.userClientRest.getUserByCourse(course.getCourseUsers()
+                    .stream()
+                    .map(courseUser -> courseUser.getUserId()).collect(Collectors.toList())));
+            return course;
+        });
     }
 
     @Transactional

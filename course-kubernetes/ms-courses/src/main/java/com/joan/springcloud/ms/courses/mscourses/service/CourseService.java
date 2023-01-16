@@ -12,6 +12,8 @@ public interface CourseService {
 
     Optional<Course> findById(Long id);
 
+    Optional<Course> findByIdWithUsers(Long id);
+
     Course save(Course course);
 
     void delete(Long id);
