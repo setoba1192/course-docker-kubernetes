@@ -30,5 +30,5 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
 ```
 ```bash
   #build docker image in specific path
-  docker build -t users . -f .\msvc-users\Dockerfile
+  docker build -t users . -f .\ms-users\Dockerfile
 ```
