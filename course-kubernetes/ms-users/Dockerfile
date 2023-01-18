@@ -1,9 +1,12 @@
 FROM openjdk:17.0.2
 
-WORKDIR /app
+WORKDIR /app/ms-users
 
-COPY ./target/ms-users-0.0.1-SNAPSHOT.jar .
+COPY ./pom.xml /app
+COPY ./ms-users .
+
+RUN ./mvnw clean package -DskipTests
 
 EXPOSE 8001
 
-ENTRYPOINT ["java","-jar","ms-users-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","./target/ms-users-0.0.1-SNAPSHOT.jar"]

@@ -28,3 +28,7 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #stop a docker container
   docker stop container_name
 ```
+```bash
+  #build docker image in specific path
+  docker build -t users . -f .\msvc-users\Dockerfile
+```
