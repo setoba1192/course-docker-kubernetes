@@ -6,7 +6,7 @@ Developed course from udemy about Docker and Kubernetes with Spring Boot
 Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
 
 
-## Useful command lines
+## Useful docker command lines
 
 ```bash
   #generate jar file
@@ -31,4 +31,8 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
 ```bash
   #build docker image in specific path
   docker build -t users . -f .\ms-users\Dockerfile
+```
+```bash
+  #run an existing container detatch automatically
+  docker start container_id
 ```
