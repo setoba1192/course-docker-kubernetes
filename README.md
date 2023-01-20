@@ -21,6 +21,10 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   docker run -p 8001:8001 image_tag_or_id
 ```
 ```bash
+  #run detached docker image with tag and port:port (internal:external)
+  docker run -d -p 8001:8001 image_tag_or_id
+```
+```bash
   #list docker container running
   docker ps
 ```
@@ -33,6 +37,10 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   docker build -t users . -f .\ms-users\Dockerfile
 ```
 ```bash
-  #run an existing container detatch automatically
+  #run an existing container detach automatically
   docker start container_id
+```
+```bash
+  #attach a runing container
+  docker attach CONTAINER_ID
 ```
