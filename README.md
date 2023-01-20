@@ -41,6 +41,18 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   docker start container_id
 ```
 ```bash
+  #run an existing attach container
+  docker start -a container_id
+```
+```bash
   #attach a runing container
   docker attach CONTAINER_ID
+```
+```bash
+  #log for runing container 
+  docker logs CONTAINER_ID
+```
+```bash
+  #log attached for runing container 
+  docker logs -f CONTAINER_ID
 ```
