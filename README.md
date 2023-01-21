@@ -107,3 +107,11 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #inspect docker container to see details
   docker container inspect IMAGE_NAME_OR_ID
 ```
+```bash
+  #build docker image with name and tag (tag is like version)
+  docker build -t users:v2 . -f .\ms-users\Dockerfile
+```
+```bash
+  #run docker image with specific version (--rm delete container after stop container)
+  docker run -p 8001:8001 --rm -d --name CONTAINER_NAME users:v2
+```
