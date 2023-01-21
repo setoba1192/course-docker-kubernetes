@@ -99,3 +99,11 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #copy folder container to local machine
   docker cp CONTAINER_ID:/folder .\folder
 ```
+```bash
+  #inspect docker image to see details
+  docker image inspect IMAGE_NAME_OR_ID
+```
+```bash
+  #inspect docker container to see details
+  docker container inspect IMAGE_NAME_OR_ID
+```
