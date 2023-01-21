@@ -81,3 +81,21 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #run docker image in interactive mode (use CMD instead ENTRYPOINT in dockerfile)
   docker run -p 8001:8001 -it image_name /bin/sh
 ```
+```bash
+  #copy files from local machine to container
+  docker cp .\File.ext CONTAINER_ID:/path/File.ext
+  
+  #Example
+  docker cp .\Login.java CONTAINER_ID:/app/Login.java
+```
+```bash
+  #copy files from from container to local machine
+  docker cp CONTAINER_ID:/path/File.ext .\File.ext 
+  
+  #Example
+  docker cp CONTAINER_ID:/app/Login.java .\Login.java
+```
+```bash
+  #copy folder container to local machine
+  docker cp CONTAINER_ID:/folder .\folder
+```
