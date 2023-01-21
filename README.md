@@ -56,3 +56,20 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #log attached for runing container 
   docker logs -f CONTAINER_ID
 ```
+```bash
+  #delete docker container (must be stopped)
+  #to delete multiple container, separate name by space
+  docker rm container_name_or_id
+```
+```bash
+  #delete docker containers with 'Exited' status
+  docker container prune
+```
+```bash
+  #delete docker image, add space to delete multiple (can delete image not being used)
+  docker rmi image_id
+```
+```bash
+  #delete all docker images not being used
+  docker image prune
+```
