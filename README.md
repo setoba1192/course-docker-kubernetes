@@ -73,3 +73,11 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #delete all docker images not being used
   docker image prune
 ```
+```bash
+  #delete all docker images not being used
+  docker image prune
+```
+```bash
+  #run docker image in interactive mode (use CMD instead ENTRYPOINT in dockerfile)
+  docker run -p 8001:8001 -it image_name /bin/sh
+```
