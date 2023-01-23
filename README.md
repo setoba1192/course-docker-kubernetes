@@ -115,3 +115,11 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #run docker image with specific version (--rm delete container after stop container)
   docker run -p 8001:8001 --rm -d --name CONTAINER_NAME users:v2
 ```
+```bash
+  #create an internal network
+  docker network create NETWORK_NAME
+```
+```bash
+  #list networks
+  docker network ls
+```
