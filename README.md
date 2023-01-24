@@ -123,3 +123,11 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #list networks
   docker network ls
 ```
+```bash
+  #run a docker image with specific external:internal port with container name and specific network
+  docker run -p 8001:8001 -d --rm --name ms-users --network spring users
+```
+```bash
+  #dun docker mysql image 
+  docker run -d -p 3307:3306 --name mysql8 --network spring -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=ms_users mysql:5
+```
