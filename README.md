@@ -163,3 +163,7 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #run docker image with overwriting environments Dockerfile  variable from .env file
   docker run -p 8001:8001 --env-file .\ms-users\.env -d --rm --name ms-users --network spring  users
 ```
+```bash
+  #run docker image overwriting args in Dockerfile
+  docker build -t users . -f .\ms-users\Dockerfile --build-arg PORT_APP=8080
+```

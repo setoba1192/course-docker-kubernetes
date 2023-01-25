@@ -1,17 +1,22 @@
+ARG MS_NAME=ms-users
+
 FROM openjdk:17-jdk-alpine as builder
 
-WORKDIR /app/ms-users
+#Define variable as global
+ARG MS_NAME
+
+WORKDIR /app/$MS_NAME
 
 COPY ./pom.xml /app
-COPY ./ms-users/.mvn ./.mvn
-COPY ./ms-users/mvnw .
-COPY ./ms-users/pom.xml .
+COPY ./$MS_NAME/.mvn ./.mvn
+COPY ./$MS_NAME/mvnw .
+COPY ./$MS_NAME/pom.xml .
 
 RUN ./mvnw clean package -Dmaven.test.skip -Dmaven.main.skip -Dspring-boot.repackage.skip && rm -r ./target
 
 #RUN ./mvnw dependency:go-offline
 
-COPY ./ms-users/src ./src
+COPY ./$MS_NAME/src ./src
 
 RUN ./mvnw clean package -DskipTests
 
@@ -20,10 +25,13 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /app
 
 RUN mkdir ./logs
+#define variable again to reload value
+ARG MS_NAME
+ARG TARGET_FOLDER=/app/$MS_NAME/target
+COPY --from=builder $TARGET_FOLDER/ms-users-0.0.1-SNAPSHOT.jar .
 
-COPY --from=builder /app/ms-users/target/ms-users-0.0.1-SNAPSHOT.jar .
-
-ENV PORT 8001
+ARG PORT_APP=8001
+ENV PORT $PORT_APP
 
 EXPOSE $PORT
 
