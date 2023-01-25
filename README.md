@@ -151,3 +151,15 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #run docker image with postgres interactive mode to use bash (Only for utility purpose)
   docker run -it --rm --network spring postgres:14-alpine psql -h postgres13 -U postgres
 ```
+```bash
+  #run docker image with overwriting an environment variable from Dockerfile
+  docker run -p 8001:8090 --env PORT=8090 -d --rm --name ms-users --network spring  users
+```
+```bash
+  #run docker image with overwriting an environment variable from Dockerfile
+  docker run -p 8001:8090 --env PORT=8090 -d --rm --name ms-users --network spring  users
+```
+```bash
+  #run docker image with overwriting environments Dockerfile  variable from .env file
+  docker run -p 8001:8001 --env-file .\ms-users\.env -d --rm --name ms-users --network spring  users
+```

@@ -23,6 +23,8 @@ RUN mkdir ./logs
 
 COPY --from=builder /app/ms-users/target/ms-users-0.0.1-SNAPSHOT.jar .
 
-EXPOSE 8001
+ENV PORT 8001
+
+EXPOSE $PORT
 
 ENTRYPOINT ["java","-jar","ms-users-0.0.1-SNAPSHOT.jar"]
