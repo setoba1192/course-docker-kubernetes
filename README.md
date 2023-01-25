@@ -128,6 +128,18 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   docker run -p 8001:8001 -d --rm --name ms-users --network spring users
 ```
 ```bash
-  #dun docker mysql image 
+  #run docker mysql image 
   docker run -d -p 3307:3306 --name mysql8 --network spring -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=ms_users mysql:5
+```
+```bash
+  #run docker postgres image 
+  docker run -p 5433:5432 --name postgres13 --network spring -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=ms_courses -d postgres:14-alpine
+```
+```bash
+  #run docker mysql with a specific volume path to persist database after delete a container (--restart=always is for start a container when docker start for the first time)
+  docker run -d -p 3307:3306 --name mysql8 --network spring -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=ms_users -v data-mysql:/var/lib/mysql --restart=always mysql:5
+```
+```bash
+  #run docker postgres with a specific volume path to persist database after delete a container (--restart=always is for start a container when docker start for the first time)
+  docker run -p 5433:5432 --name postgres13 --network spring -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=ms_courses -d -v data-postgresql:/var/lib/postgresql --restart=always postgres:14-alpine
 ```
