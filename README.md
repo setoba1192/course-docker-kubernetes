@@ -143,3 +143,11 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #run docker postgres with a specific volume path to persist database after delete a container (--restart=always is for start a container when docker start for the first time)
   docker run -p 5433:5432 --name postgres13 --network spring -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=ms_courses -d -v data-postgresql:/var/lib/postgresql --restart=always postgres:14-alpine
 ```
+```bash
+  #run docker image with mysql interactive mode to use bash (Only for utility purpose)
+  docker run -it --rm --network spring mysql:8 bash
+```
+```bash
+  #run docker image with postgres interactive mode to use bash (Only for utility purpose)
+  docker run -it --rm --network spring postgres:14-alpine psql -h postgres13 -U postgres
+```
