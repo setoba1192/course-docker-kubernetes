@@ -74,8 +74,8 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   docker image prune
 ```
 ```bash
-  #delete all docker images not being used
-  docker image prune
+  #force delete all docker images not being used
+  docker image prune -a
 ```
 ```bash
   #run docker image in interactive mode (use CMD instead ENTRYPOINT in dockerfile)
@@ -170,10 +170,14 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
 
 ## Useful docker-compose command lines
 ```bash
-  #build and run docker-compose.yaml defined in current folder
+  #run docker-compose.yaml defined in current folder
   docker-compose up -d
 ```
 ```bash
-  #stop and delete containers
-  docker-compose down
+  #force build images and run docker-compose.yaml defined in current folder
+  docker-compose up --build -d
+```
+```bash
+  #stop and delete containers. -v to delete volumes
+  docker-compose down -v
 ```
