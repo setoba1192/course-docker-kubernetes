@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.List;
 
-@FeignClient(name = "ms-users", url = "ms-users:8001")
+@FeignClient(name = "ms-users", url = "${ms.users.url}")
 public interface UserClientRest {
 
     /**
