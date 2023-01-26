@@ -1,17 +1,21 @@
+ARG MS_NAME=ms-courses
+
 FROM openjdk:17-jdk-alpine as builder
 
-WORKDIR /app/ms-courses
+ARG MS_NAME
+
+WORKDIR /app/$MS_NAME
 
 COPY ./pom.xml /app
-COPY ./ms-courses/.mvn ./.mvn
-COPY ./ms-courses/mvnw .
-COPY ./ms-courses/pom.xml .
+COPY ./$MS_NAME/.mvn ./.mvn
+COPY ./$MS_NAME/mvnw .
+COPY ./$MS_NAME/pom.xml .
 
 #RUN ./mvnw clean package -Dmaven.test.skip -Dmaven.main.skip -Dspring-boot.repackage.skip && rm -r ./target
 
 RUN ./mvnw dependency:go-offline
 
-COPY ./ms-courses/src ./src
+COPY ./$MS_NAME/src ./src
 
 RUN ./mvnw clean package -DskipTests
 
@@ -21,8 +25,14 @@ WORKDIR /app
 
 RUN mkdir ./logs
 
-COPY --from=builder /app/ms-courses/target/ms-courses-0.0.1-SNAPSHOT.jar .
+#define variable again to reload value
+ARG MS_NAME
+ARG TARGET_FOLDER=/app/$MS_NAME/target
+COPY --from=builder $TARGET_FOLDER/ms-courses-0.0.1-SNAPSHOT.jar .
 
-EXPOSE 8001
+ARG PORT_APP=8002
+ENV PORT $PORT_APP
+
+EXPOSE $PORT
 
 ENTRYPOINT ["java","-jar","ms-courses-0.0.1-SNAPSHOT.jar"]

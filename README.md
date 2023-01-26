@@ -167,3 +167,13 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #run docker image overwriting args in Dockerfile
   docker build -t users . -f .\ms-users\Dockerfile --build-arg PORT_APP=8080
 ```
+
+## Useful docker-compose command lines
+```bash
+  #build and run docker-compose.yaml defined in current folder
+  docker-compose up -d
+```
+```bash
+  #stop and delete containers
+  docker-compose down
+```
