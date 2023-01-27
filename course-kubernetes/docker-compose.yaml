@@ -32,9 +32,10 @@ services:
 
   ms-users:
     container_name: ms-users
-    build:
-      context: ./
-      dockerfile: ./ms-users/Dockerfile
+    image: setoba06/users
+#    build:
+#      context: ./
+#      dockerfile: ./ms-users/Dockerfile
     ports:
     - "8001:8001"
     env_file: ./ms-users/.env
@@ -46,9 +47,10 @@ services:
 
   ms-courses:
     container_name: ms-courses
-    build:
-      context: ./
-      dockerfile: ./ms-courses/Dockerfile
+    image: setoba06/courses
+#    build:
+#      context: ./
+#      dockerfile: ./ms-courses/Dockerfile
     ports:
       - "8002:8002"
     env_file: ./ms-courses/.env
