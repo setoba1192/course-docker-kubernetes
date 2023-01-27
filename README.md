@@ -167,6 +167,18 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #run docker image overwriting args in Dockerfile
   docker build -t users . -f .\ms-users\Dockerfile --build-arg PORT_APP=8080
 ```
+```bash
+  #create image copy from existing
+  docker tag course-kubernetes-ms-users setoba06/users
+```
+```bash
+  #push docker image in hub.docker
+  docker push userName/imageName
+```
+```bash
+  #pull docker image in hub.docker
+  docker pull userName/imageName
+```
 
 ## Useful docker-compose command lines
 ```bash
