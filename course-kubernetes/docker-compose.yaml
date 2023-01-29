@@ -25,7 +25,7 @@ services:
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: ms_courses
     volumes:
-      - data-postgresql:/var/lib/postgresql
+      - data-postgresql:/var/lib/postgresql/data
     restart: always
     networks:
       - spring
