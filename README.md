@@ -201,4 +201,7 @@ sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-c
 sudo chmod +x /usr/local/bin/docker-compose
 
 docker-compose version  
+
+#global mode
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
