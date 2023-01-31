@@ -194,14 +194,25 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   docker-compose down -v
 ```
 
+## Install docker in linux amazon
+```bash
+   sudo yum -y update
+   sudo amazon-linux-extras install docker
+   sudo service docker start
+```
+
 ## Install docker compose in linux amazon
 ```bash
-sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+   sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 
-sudo chmod +x /usr/local/bin/docker-compose
+   sudo chmod +x /usr/local/bin/docker-compose
 
-docker-compose version  
+   docker-compose version  
 
-#global mode
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+   #global mode
+   sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+```
+```bash
+  #copy file form local machine to ec2 instance
+  scp -i "key.pem" filename ec2-user@ec2-44-211-139-45.compute-1.amazonaws.com:/home/ec2-user
 ```
