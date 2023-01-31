@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  ms-postgres:
+    container_name: ms-postgres
+    image: postgres:14-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: ms_courses
+    volumes:
+      - data-postgresql:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - spring
+
+  ms-courses:
+    container_name: ms-courses
+    image: setoba06/courses
+#    build:
+#      context: ./
+#      dockerfile: ./ms-courses/Dockerfile
+    ports:
+      - "8002:8002"
+    #env_file: ./ms-courses/.env
+    #added to deploy in aws
+    environment:
+      PORT: 8002
+      DB_HOST: ms-postgres:5432
+      DATABASE: ms_courses
+      DB_USERNAME: postgres
+      DB_PASSWORD: 1234
+      USERS_URL: ec2-44-211-139-45.compute-1.amazonaws.com:8001
+    networks:
+      - spring
+    depends_on:
+      - ms-postgres
+    restart: always
+
+volumes:
+  data-postgresql:
+    name: data-postgresql
+networks:
+  spring:
+    name: spring

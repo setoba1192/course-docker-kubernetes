@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  ms-mysql:
+    container_name: ms-mysql
+    image: mysql:8
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: ms_users
+    volumes:
+      - data-mysql:/var/lib/mysql
+    restart: always
+    #configure a network is not mandatory.
+    #Services into docker-compose.yml can communicate each other automatically
+    networks:
+      - spring
+  ms-users:
+    container_name: ms-users
+    image: setoba06/users
+#    build:
+#      context: ./
+#      dockerfile: ./ms-users/Dockerfile
+    ports:
+    - "8001:8001"
+    #env_file: ./ms-users/.env
+    #added to deploy in aws
+    environment:
+      PORT: 8001
+      DB_HOST: ms-mysql:3306
+      DATABASE: ms_users
+      DB_USERNAME: root
+      DB_PASSWORD: 1234
+      COURSES_URL: 	ec2-184-72-79-199.compute-1.amazonaws.com:8002
+    networks:
+      - spring
+    depends_on:
+      - ms-mysql
+    restart: always
+
+volumes:
+  data-mysql:
+    name: data-mysql
+networks:
+  spring:
+    name: spring
