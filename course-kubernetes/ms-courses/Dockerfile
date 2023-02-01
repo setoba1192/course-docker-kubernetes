@@ -35,4 +35,5 @@ ENV PORT $PORT_APP
 
 EXPOSE $PORT
 
-ENTRYPOINT ["java","-jar","ms-courses-0.0.1-SNAPSHOT.jar"]
+CMD sleep 20 && java -jar ms-courses-0.0.1-SNAPSHOT.jar
+#ENTRYPOINT ["java","-jar","ms-courses-0.0.1-SNAPSHOT.jar"]
