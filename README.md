@@ -216,3 +216,10 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #copy file form local machine to ec2 instance
   scp -i "key.pem" filename ec2-user@ec2-44-211-139-45.compute-1.amazonaws.com:/home/ec2-user
 ```
+
+## Useful commands to work with Kubernetes
+
+```bash
+  #start minikube in windows usen hyperv
+  minikube start --driver=hyperv
+```
