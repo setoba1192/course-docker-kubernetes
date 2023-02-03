@@ -223,3 +223,27 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #start minikube in windows usen hyperv
   minikube start --driver=hyperv
 ```
+```bash
+  #create a yaml to create deployment in declarative way
+  kubectl create deployment mysql8 --image=mysql:8 --port=3306 --dry-run=client -o yaml > deployment-mysql.yaml
+```
+```bash
+  #create a deployment from yaml file
+  kubectl apply -f .\deployment-mysql.yaml
+```
+```bash
+  #list all deployments
+  kubectl get deploy
+```
+```bash
+  #delete a deployment
+  kubectl delete deployment deploymentName
+```
+```bash
+  #describe a pod
+  kubectl describe pod mysql8-86b85b545c-zgspp
+```
+```bash
+  #log pod
+  kubectl logs  mysql8-86b85b545c-zgspp
+```
