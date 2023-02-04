@@ -247,3 +247,16 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #log pod
   kubectl logs  mysql8-86b85b545c-zgspp
 ```
+```bash
+  #expose a deployment by port in an internal cluster
+  kubectl expose deployment mysql8 --port=3306 --type=ClusterIP
+```
+```bash
+  #list services
+  kubectl get svc
+```
+```bash
+  #get information from service
+  kubectl describe service mysql8
+```
+
