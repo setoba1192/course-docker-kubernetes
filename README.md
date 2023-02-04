@@ -224,6 +224,10 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   minikube start --driver=hyperv
 ```
 ```bash
+  #create a deployment in imperative way
+  kubectl create deployment ms-users --image=setoba06/users:1.1 --port=8001
+```
+```bash
   #create a yaml to create deployment in declarative way
   kubectl create deployment mysql8 --image=mysql:8 --port=3306 --dry-run=client -o yaml > deployment-mysql.yaml
 ```
