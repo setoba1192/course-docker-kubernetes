@@ -35,6 +35,6 @@ ENV PORT $PORT_APP
 
 EXPOSE $PORT
 
-CMD sleep 20 && java -jar ms-users-0.0.1-SNAPSHOT.jar
-
+#CMD sleep 20 && java -jar ms-users-0.0.1-SNAPSHOT.jar
+CMD ["java", "-jar", "ms-users-0.0.1-SNAPSHOT.jar"]
 #ENTRYPOINT ["java","-jar","ms-users-0.0.1-SNAPSHOT.jar"]
