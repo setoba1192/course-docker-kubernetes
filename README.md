@@ -3,7 +3,7 @@ Developed course from udemy about Docker and Kubernetes with Spring Boot
 
 ## Tech Stack
 
-Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
+Spring Boot 3, Docker, Kubernetes, Mysql, Postgres, Minikube, AWS
 
 
 ## Useful docker command lines
@@ -256,6 +256,10 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   kubectl expose deployment mysql8 --port=3306 --type=ClusterIP
 ```
 ```bash
+  #expose a deployment by port in an internal cluster LoadBalancer (Balance external)
+  kubectl expose deployment ms-users --port=8001 --type=LoadBalancer
+```
+```bash
   #list services
   kubectl get svc
 ```
@@ -263,4 +267,15 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres
   #get information from service
   kubectl describe service mysql8
 ```
-
+```bash
+  #get cluster public ip
+  minikube service ms-users --url
+```
+```bash
+  #update image in container (#users: container-name, #ms-users: service-name), image must have different version replacing latest by specific version
+  kubectl set image deployment ms-users users=setoba06/users:latest
+```
+```bash
+  #scale replicas in deployment
+  kubectl scale deployment ms-users --replicas=3
+```
