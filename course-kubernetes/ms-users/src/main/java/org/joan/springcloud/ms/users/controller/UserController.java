@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import org.joan.springcloud.ms.users.model.entity.User;
 import org.joan.springcloud.ms.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -17,6 +19,14 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    @GetMapping("/crash")
+    public void crash() {
+        SpringApplication.exit(applicationContext, () -> -1);
+    }
 
     @GetMapping
     public ResponseEntity<List<User>> list() {
