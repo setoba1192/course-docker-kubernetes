@@ -228,8 +228,9 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres, Minikube, AWS
   kubectl create deployment ms-users --image=setoba06/users:1.1 --port=8001
 ```
 ```bash
-  #create a yaml to create deployment in declarative way
+  #create a yaml to create deployment in declarative way #--dry-run=client : to avoid create deployment
   kubectl create deployment mysql8 --image=mysql:8 --port=3306 --dry-run=client -o yaml > deployment-mysql.yaml
+  kubectl create deploy ms-users --port=8001 --image=setoba06/users:1.2 --dry-run=client -o yaml > deployment-users.yaml
 ```
 ```bash
   #create a deployment from yaml file
@@ -278,4 +279,8 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres, Minikube, AWS
 ```bash
   #scale replicas in deployment
   kubectl scale deployment ms-users --replicas=3
+```
+```bash
+  #print yaml file of service 
+  kubectl get service mysql8 -o yaml
 ```
