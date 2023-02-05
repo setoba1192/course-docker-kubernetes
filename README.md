@@ -293,7 +293,10 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres, Minikube, AWS
   kubectl get service mysql8 -o yaml
 ```
 ```bash
-  #list persistents volumes, list persistents volumes claims
+  #list persistents volumes
   kubectl get pv
+  #list persistents volumes claims
   kubectl get pvc
+  #list secret configurations
+  kubectl get secret
 ```

@@ -36,12 +36,12 @@ spec:
                 key: database
           - name: DB_USERNAME
             valueFrom:
-              configMapKeyRef:
+              secretKeyRef:
                 name: ms-courses
                 key: username
           - name: DB_PASSWORD
             valueFrom:
-              configMapKeyRef:
+              secretKeyRef:
                 name: ms-courses
                 key: password
           - name: USERS_URL
