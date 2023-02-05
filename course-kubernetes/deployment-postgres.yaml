@@ -19,9 +19,15 @@ spec:
             - containerPort: 5432
           env:
             - name: POSTGRES_PASSWORD
-              value: "1234"
+              valueFrom:
+                configMapKeyRef:
+                  name: ms-courses
+                  key: password
             - name: POSTGRES_DB
-              value: "ms_courses"
+              valueFrom:
+                configMapKeyRef:
+                  name: ms-courses
+                  key: database
           volumeMounts:
             - name: data-postgres
               mountPath: /var/lib/postgresql/data

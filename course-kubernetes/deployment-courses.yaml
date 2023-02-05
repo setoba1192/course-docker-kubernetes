@@ -18,3 +18,34 @@ spec:
         name: courses
         ports:
         - containerPort: 8002
+        env:
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: ms-courses
+                key: port
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: ms-courses
+                key: db_host
+          - name: DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: ms-courses
+                key: database
+          - name: DB_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: ms-courses
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: ms-courses
+                key: password
+          - name: USERS_URL
+            valueFrom:
+              configMapKeyRef:
+                name: ms-courses
+                key: user_url
