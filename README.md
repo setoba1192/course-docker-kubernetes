@@ -292,3 +292,8 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres, Minikube, AWS
   #print yaml file of service 
   kubectl get service mysql8 -o yaml
 ```
+```bash
+  #list persistents volumes, list persistents volumes claims
+  kubectl get pv
+  kubectl get pvc
+```
