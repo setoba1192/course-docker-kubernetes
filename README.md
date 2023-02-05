@@ -220,6 +220,10 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres, Minikube, AWS
 ## Useful commands to work with Kubernetes
 
 ```bash
+  #minikube dashboard
+  minikube dashboard
+```
+```bash
   #start minikube in windows usen hyperv
   minikube start --driver=hyperv
 ```
@@ -243,6 +247,10 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres, Minikube, AWS
 ```bash
   #delete a deployment
   kubectl delete deployment deploymentName
+```
+```bash
+  #delete a deployment by yaml
+  kubectl delete -f .\deployment-users.yaml
 ```
 ```bash
   #describe a pod
