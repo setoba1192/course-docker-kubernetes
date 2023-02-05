@@ -6,8 +6,8 @@ data:
   port: "8001"
   db_host: mysql8:3306
   database: ms_users
-  username: root
-  password: "1234"
+  #username: root
+  #password: "1234"
   course_url: ms-courses
 ---
 apiVersion: v1
@@ -18,6 +18,6 @@ data:
   port: "8002"
   db_host: postgres14:5432
   database: ms_courses
-  username: postgres
-  password: "1234"
+  #username: postgres
+  #password: "1234"
   user_url: ms-users
