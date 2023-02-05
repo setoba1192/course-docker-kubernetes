@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-courses
+#spec : specification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-courses
+  template:
+    metadata:
+      labels:
+        app: ms-courses
+    spec:
+      containers:
+      - image: setoba06/courses:latest
+        name: courses
+        ports:
+        - containerPort: 8002
