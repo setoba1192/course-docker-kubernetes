@@ -300,3 +300,7 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres, Minikube, AWS
   #list secret configurations
   kubectl get secret
 ```
+```bash
+  #command to add permissions to deployments to access kubernetes API
+  kubectl create clusterrolebinding admin --clusterrole=cluster-admin --serviceaccount=default:default
+```
