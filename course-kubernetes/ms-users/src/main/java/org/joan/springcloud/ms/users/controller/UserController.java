@@ -6,6 +6,7 @@ import org.joan.springcloud.ms.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -23,14 +24,23 @@ public class UserController {
     @Autowired
     private ApplicationContext applicationContext;
 
+    @Autowired
+    private Environment environment;
+
     @GetMapping("/crash")
     public void crash() {
         SpringApplication.exit(applicationContext, () -> -1);
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> list() {
-        return ResponseEntity.ok(userService.list());
+    public ResponseEntity<?> list() {
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("users", userService.list());
+        map.put("podIP", environment.getProperty("MY_POD_NAME"));
+        map.put("podName", environment.getProperty("MY_POD_IP"));
+
+        return ResponseEntity.ok(map);
     }
 
     @GetMapping("{id}")
