@@ -39,6 +39,8 @@ public class UserController {
         map.put("users", userService.list());
         map.put("podIP", environment.getProperty("MY_POD_NAME"));
         map.put("podName", environment.getProperty("MY_POD_IP"));
+        map.put("podName", environment.getProperty("MY_POD_IP"));
+        map.put("text", environment.getProperty("config.texto"));
 
         return ResponseEntity.ok(map);
     }
