@@ -16,6 +16,7 @@
     <modules>
         <module>ms-users</module>
         <module>ms-courses</module>
+        <module>ms-gateway</module>
     </modules>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

@@ -4,7 +4,7 @@ metadata:
   name: ms-users
 #spec : specification
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: ms-users
@@ -58,20 +58,26 @@ spec:
               fieldRef:
                 fieldPath: status.podIP
 
-        readinessProbe:
-          httpGet:
-            path: /actuator/health/readiness
-            port: 8001
-            scheme: HTTP
-          initialDelaySeconds: 5
-          periodSeconds: 20
-          timeoutSeconds: 10
-        livenessProbe:
-          httpGet:
-            path: /actuator/health/liveness
-            port: 8001
-            scheme: HTTP
-          initialDelaySeconds: 10
-          periodSeconds: 30
-          timeoutSeconds: 10
-        resources:
+#       readinessProbe:
+#          httpGet:
+#            path: /actuator/health/readiness
+#            port: 8001
+#            scheme: HTTP
+#          initialDelaySeconds: 5
+#          periodSeconds: 20
+#          timeoutSeconds: 10
+#        livenessProbe:
+#          httpGet:
+#            path: /actuator/health/liveness
+#            port: 8001
+#            scheme: HTTP
+#          initialDelaySeconds: 10
+#          periodSeconds: 30
+#          timeoutSeconds: 10
+#        resources:
+#          requests:
+#            memory: "512Mi"
+#            cpu: "400m"
+#          limits:
+#            memory: "800Mi"
+#            cpu: "500m"
