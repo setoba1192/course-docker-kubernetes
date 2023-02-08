@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        #Spring application name
+        - id: ms-courses
+          #lb : loadbalancer
+          uri: lb://ms-courses
+          predicates:
+            - Path=/api/courses/**
+          filters:
+            - StripPrefix=2
+        - id: ms-users
+          #lb : loadbalancer
+          uri: lb://ms-users
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - StripPrefix=2
