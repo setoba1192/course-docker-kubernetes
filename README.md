@@ -304,3 +304,20 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres, Minikube, AWS
   #command to add permissions to deployments to access kubernetes API
   kubectl create clusterrolebinding admin --clusterrole=cluster-admin --serviceaccount=default:default
 ```
+
+## Useful commands to work with Kubernetes in AWS
+
+```bash
+  #configure aws cli
+  aws configure
+  #after that, paste AWS Access Key ID, Secret Acess Key and set the region name where we're working
+```
+```bash
+  #Configure eks in local machine for kubernetes 'k8s-course' => EKS cluster name
+  aws eks --region us-east-1 update-kubeconfig --name k8s-course
+  #at this point aws cli is connected to aws account to fetch information about EKS, pods, service, deployment, etc
+```
+```bash
+  #Install aws efs csi driver https://github.com/kubernetes-sigs/aws-efs-csi-driver
+  kubectl apply -k "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.5"
+```
