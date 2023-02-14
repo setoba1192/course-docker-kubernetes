@@ -32,6 +32,8 @@ kind: ConfigMap
 metadata:
   name: ms-courses
 data:
+  lb_auth_issuer_uri: http://127.0.0.1:9000
+  lb_users_uri: http://127.0.0.1:9000
   port: "8002"
   db_host: postgres14:5432
   database: ms_courses
