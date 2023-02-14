@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-auth
+#spec : specification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-auth
+  template:
+    metadata:
+      labels:
+        role: ms-auth
+    spec:
+      containers:
+      - image: setoba06/auth:latest
+        name: auth
+        ports:
+        - containerPort: 8090
+        env:
+          - name: LB_USERS_URI
+            valueFrom:
+              configMapKeyRef:
+                name: ms-users
+                key: lb_users_uri
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-auth
+spec:
+  ports:
+    - port: 9000
+      protocol: TCP
+      targetPort: 9000
+  selector:
+    role: ms-auth
+  type: LoadBalancer
