@@ -65,7 +65,7 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	@Order
+	@Order(2)
 	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
 			throws Exception {
 		http
@@ -83,7 +83,7 @@ public class SecurityConfig {
 	public UserDetailsService userDetailsService() {
 		UserDetails userDetails = User.withDefaultPasswordEncoder()
 				.username("admin")
-				.password("admin")
+				.password("12345")
 				.roles("USER")
 				.build();
 
@@ -99,7 +99,7 @@ public class SecurityConfig {
 				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
 				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
 				.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-				.redirectUri(env.getProperty("LB_USERS_URI") + "/login/oauth2/ms-users-client")
+				.redirectUri(env.getProperty("LB_USERS_URI") + "/login/oauth2/code/ms-users-client")
 				.redirectUri(env.getProperty("LB_USERS_URI") + "/authorized")
 				.scope(OidcScopes.OPENID)
 				.scope(OidcScopes.PROFILE)
