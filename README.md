@@ -5,6 +5,13 @@ Developed course from udemy about Docker and Kubernetes with Spring Boot
 
 Spring Boot 3, Docker, Kubernetes, Mysql, Postgres, Minikube, AWS
 
+##Users login
+
+--generate ip with minikube service ms-users --url
+http://172.18.147.232:31884/oauth2/authorization/ms-users-client
+
+--generate code with read and write scope #first server url and redirect #server user
+http://172.29.98.36:31065/oauth2/authorize?response_type=code&client_id=users-client&scope=read%20write&redirect_uri=http://172.29.98.36:31884/authorized
 
 ## Useful docker command lines
 
@@ -301,7 +308,7 @@ Spring Boot 3, Docker, Kubernetes, Mysql, Postgres, Minikube, AWS
   kubectl get secret
 ```
 ```bash
-  #command to add permissions to deployments to access kubernetes API
+  #FIRST STEP command to add permissions to deployments to access kubernetes API
   kubectl create clusterrolebinding admin --clusterrole=cluster-admin --serviceaccount=default:default
 ```
 
