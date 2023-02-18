@@ -40,12 +40,12 @@ public class CourseServiceImpl implements CourseService {
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<Course> findByIdWithUsers(Long id) {
+    public Optional<Course> findByIdWithUsers(Long id, String token) {
 
         return this.courseRepository.findById(id).map(course -> {
             course.setUsers(this.userClientRest.getUserByCourse(course.getCourseUsers()
                     .stream()
-                    .map(courseUser -> courseUser.getUserId()).collect(Collectors.toList())));
+                    .map(courseUser -> courseUser.getUserId()).collect(Collectors.toList()), token));
             return course;
         });
     }
@@ -64,11 +64,11 @@ public class CourseServiceImpl implements CourseService {
 
     @Transactional
     @Override
-    public Optional<User> assignUser(User user, Long courseId) {
+    public Optional<User> assignUser(User user, Long courseId, String token) {
 
         Optional<Course> course = courseRepository.findById(courseId);
         if (course.isPresent()) {
-            User userMs = userClientRest.findById(user.getId());
+            User userMs = userClientRest.findById(user.getId(), token);
 
             Course c = course.get();
             CourseUser courseUser = CourseUser.builder()
@@ -104,10 +104,10 @@ public class CourseServiceImpl implements CourseService {
 
     @Transactional
     @Override
-    public Optional<User> unAssignUser(User user, Long courseId) {
+    public Optional<User> unAssignUser(User user, Long courseId, String token) {
         Optional<Course> course = courseRepository.findById(courseId);
         if (course.isPresent()) {
-            User userMs = userClientRest.findById(user.getId());
+            User userMs = userClientRest.findById(user.getId(), token);
 
             Course c = course.get();
             CourseUser courseUser = CourseUser.builder()

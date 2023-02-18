@@ -12,17 +12,17 @@ public interface CourseService {
 
     Optional<Course> findById(Long id);
 
-    Optional<Course> findByIdWithUsers(Long id);
+    Optional<Course> findByIdWithUsers(Long id, String token);
 
     Course save(Course course);
 
     void delete(Long id);
 
-    Optional<User> assignUser(User user, Long courseId);
+    Optional<User> assignUser(User user, Long courseId, String token);
 
     Optional<User> saveUser(User user, Long courseId);
 
-    Optional<User> unAssignUser(User user, Long courseId);
+    Optional<User> unAssignUser(User user, Long courseId, String token);
 
     public void deleteCourseUserById(Long userId);
 

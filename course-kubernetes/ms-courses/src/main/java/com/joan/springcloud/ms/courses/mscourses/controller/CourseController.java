@@ -64,10 +64,10 @@ public class CourseController {
     }
 
     @PutMapping("/assign-user/{courseId}")
-    public ResponseEntity<?> assignUser(@RequestBody User user, @PathVariable Long courseId) {
+    public ResponseEntity<?> assignUser(@RequestBody User user, @PathVariable Long courseId, @RequestHeader(value = "Authorization", required = true) String token) {
 
         try {
-            return courseService.assignUser(user, courseId).map(ResponseEntity::ok)
+            return courseService.assignUser(user, courseId, token).map(ResponseEntity::ok)
                     .orElseGet(() -> ResponseEntity.notFound().build());
         } catch (FeignException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -87,9 +87,9 @@ public class CourseController {
     }
 
     @DeleteMapping("/delete-course-user/{courseId}")
-    public ResponseEntity<?> deleteUser(@RequestBody User user, @PathVariable Long courseId) {
+    public ResponseEntity<?> deleteUser(@RequestBody User user, @PathVariable Long courseId, @RequestHeader(value = "Authorization", required = true) String token) {
         try {
-            return courseService.unAssignUser(user, courseId).map(ResponseEntity::ok)
+            return courseService.unAssignUser(user, courseId, token).map(ResponseEntity::ok)
                     .orElseGet(() -> ResponseEntity.notFound().build());
         } catch (FeignException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -98,8 +98,8 @@ public class CourseController {
     }
 
     @GetMapping("/users-course/{courseId}")
-    public ResponseEntity<?> findByIdWithUsers(@PathVariable Long courseId) {
-        return this.courseService.findByIdWithUsers(courseId)
+    public ResponseEntity<?> findByIdWithUsers(@PathVariable Long courseId, @RequestHeader(value = "Authorization", required = true) String token) {
+        return this.courseService.findByIdWithUsers(courseId, token)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

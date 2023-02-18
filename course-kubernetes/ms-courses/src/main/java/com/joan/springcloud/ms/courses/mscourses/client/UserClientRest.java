@@ -16,12 +16,12 @@ public interface UserClientRest {
      * @return
      */
     @GetMapping("/{id}")
-    public User findById(@PathVariable Long id);
+    public User findById(@PathVariable Long id, @RequestHeader(value = "Authorization", required = true) String token);
 
     @PostMapping("/")
     public User save(@RequestBody User user);
 
     @GetMapping("/users-course")
-    List<User> getUserByCourse(@RequestParam Collection<Long> ids);
+    List<User> getUserByCourse(@RequestParam Collection<Long> ids, @RequestHeader(value = "Authorization", required = true) String token);
 
 }
