@@ -118,4 +118,10 @@ public class UserController {
         return Collections.singletonMap("code", code);
     }
 
+    @GetMapping("/login")
+    public ResponseEntity<?> loginByEmail(@RequestParam(name = "email") String email) {
+        Optional<User> userOptional = userService.findByEmail(email);
+        return userOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
 }
