@@ -33,7 +33,9 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .oauth2Login(oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/ms-users-client"))
+                .csrf().disable()
                 .oauth2Client(withDefaults())
+                .csrf().disable()
                 .oauth2ResourceServer().jwt();
 
         return httpSecurity.build();
