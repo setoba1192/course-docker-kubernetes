@@ -18,19 +18,22 @@ import java.util.Collections;
 @Service
 public class UserService implements UserDetailsService {
 
-    private WebClient webClient;
+    private WebClient.Builder webClient;
 
     private Logger log = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
-    public UserService(WebClient webClient) {
+    public UserService(WebClient.Builder webClient) {
         this.webClient = webClient;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         try {
-            UserDTO userDTO = webClient.get().uri("http://ms-users:8001/login", uri -> uri.queryParam("email", email).build())
+            UserDTO userDTO = webClient
+                    .build()
+                    .get()
+                    .uri("http://ms-users/login", uri -> uri.queryParam("email", email).build())
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .bodyToMono(UserDTO.class)
