@@ -23,7 +23,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests((requests) ->
-                requests.requestMatchers("/authorized").permitAll()
+                requests.requestMatchers("/authorized", "/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/", "/{id}").hasAnyAuthority("SCOPE_read", "SCOPE_write")
                         .requestMatchers(HttpMethod.POST, "/").hasAuthority("SCOPE_write")
                         .requestMatchers(HttpMethod.PUT, "/{id}").hasAuthority("SCOPE_write")
